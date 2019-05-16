@@ -21,9 +21,9 @@
 
   <mat-chip-list>
     <mat-chip
-      *ngFor="let goal of goals"
       selected
-      color="accent"
+      [color]="goal.favorite === true ? 'warn' : 'accent'"
+      *ngFor="let goal of goals"
       (click)="onSelect(goal)"
       >{{ goal.name }}, {{ goal.date | date }}</mat-chip
     >
@@ -31,6 +31,8 @@
   <br />
   <app-goal-detail
     [passedGoal]="selectedGoal"
+    (favoriteGoal)="favGoal($event)"
+    (deleteGoal)="deletedGoal($event)"
     *ngIf="selectedGoal"
   ></app-goal-detail>
 </div>

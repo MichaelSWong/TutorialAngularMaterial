@@ -26,6 +26,24 @@ export class GoalsComponent {
     this.selectedGoal = goal;
     console.log(this.selectedGoal);
   }
+
+  favGoal(event) {
+    console.log(event);
+    this.goals.forEach((goal, i) => {
+      if (goal === event) this.goals[i] = event;
+    });
+  }
+
+  deletedGoal(event) {
+    if (this.goals.includes(event)) {
+      this.goals.forEach((goal, i) => {
+        if (goal === event) {
+          this.goals.splice(i, 1);
+        }
+      });
+    }
+  }
+
   constructor() {}
 
   ngOnInit() {}
