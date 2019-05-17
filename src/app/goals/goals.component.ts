@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { GOAL } from "../_interface/goals.model";
+import { GoalService } from "../services/goal.service";
 
 @Component({
   selector: "app-goals",
@@ -14,37 +15,31 @@ export class GoalsComponent {
   date: Date;
   selectedGoal: GOAL;
 
-  onAddGoal() {
+  constructor(private goalService: GoalService) {}
+
+  ngOnInit() {
+    this.goals = this.goalService.getGoals();
+  }
+
+  addGoal() {
     const goal = new GOAL();
     goal.name = this.name;
     goal.date = this.date;
 
-    this.goals.push(goal);
+    // ? this was changed when we added a service
+    //this.goals.push(goal);
+    this.goalService.addGoal(goal);
   }
 
   onSelect(goal: GOAL) {
     this.selectedGoal = goal;
-    console.log(this.selectedGoal);
   }
 
-  favGoal(event) {
-    console.log(event);
-    this.goals.forEach((goal, i) => {
-      if (goal === event) this.goals[i] = event;
-    });
+  updateGoal(event) {
+    this.goalService.updateGoal(event);
   }
 
   deletedGoal(event) {
-    if (this.goals.includes(event)) {
-      this.goals.forEach((goal, i) => {
-        if (goal === event) {
-          this.goals.splice(i, 1);
-        }
-      });
-    }
+    this.goalService.deleteGoal(event);
   }
-
-  constructor() {}
-
-  ngOnInit() {}
 }

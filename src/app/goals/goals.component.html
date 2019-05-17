@@ -14,7 +14,7 @@
     <mat-datepicker #myDatepicker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit" (click)="onAddGoal()">
+  <button mat-raised-button color="primary" type="submit" (click)="addGoal()">
     Add Button
   </button>
   <br />
@@ -31,7 +31,7 @@
   <br />
   <app-goal-detail
     [passedGoal]="selectedGoal"
-    (favoriteGoal)="favGoal($event)"
+    (favoriteGoal)="updateGoal($event)"
     (deleteGoal)="deletedGoal($event)"
     *ngIf="selectedGoal"
   ></app-goal-detail>

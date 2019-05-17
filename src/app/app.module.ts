@@ -7,6 +7,7 @@ import { GoalsComponent } from "./goals/goals.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule } from "./material/material.module";
 import { GoalDetailComponent } from "./goals/goal-detail/goal-detail.component";
+import { GoalService } from "./services/goal.service";
 
 @NgModule({
   declarations: [AppComponent, GoalsComponent, GoalDetailComponent],
@@ -16,7 +17,7 @@ import { GoalDetailComponent } from "./goals/goal-detail/goal-detail.component";
     MaterialModule,
     FormsModule
   ],
-  providers: [],
+  providers: [GoalService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
