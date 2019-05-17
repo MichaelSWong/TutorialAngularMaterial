@@ -18,7 +18,12 @@ export class GoalsComponent {
   constructor(private goalService: GoalService) {}
 
   ngOnInit() {
-    this.goals = this.goalService.getGoals();
+    // this.goals = this.goalService.getGoals();
+    this.getGoals();
+  }
+
+  getGoals() {
+    this.goalService.getGoals().subscribe(goals => (this.goals = goals));
   }
 
   addGoal() {
@@ -28,7 +33,9 @@ export class GoalsComponent {
 
     // ? this was changed when we added a service
     //this.goals.push(goal);
-    this.goalService.addGoal(goal);
+    this.goalService.addGoal(goal).subscribe(() => {
+      this.goals.push(goal);
+    });
   }
 
   onSelect(goal: GOAL) {
@@ -36,10 +43,17 @@ export class GoalsComponent {
   }
 
   updateGoal(event) {
-    this.goalService.updateGoal(event);
+    this.goalService.updateGoal(event).subscribe(() => {
+      console.log("goal updated");
+    });
   }
 
   deletedGoal(event) {
-    this.goalService.deleteGoal(event);
+    // ? to delete from the UI
+    this.goals = this.goals.filter(g => g !== event);
+
+    this.goalService.deleteGoal(event).subscribe(() => {
+      console.log("goal deleted");
+    });
   }
 }
