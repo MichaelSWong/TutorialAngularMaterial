@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { GOAL } from "../_interface/goals.model";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { GOAL } from '../_interface/goals.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class GoalService {
   // goals: GOAL[] = [
@@ -18,11 +18,11 @@ export class GoalService {
   //   }
   // ];
 
-  url = "https://so-goals-api.herokuapp.com/api/goals";
-  urlOne = "https://so-goals-api.herokuapp.com/api/goal";
+  url = 'https://so-goals-api.herokuapp.com/api/goals';
+  urlOne = 'https://so-goals-api.herokuapp.com/api/goal';
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     })
   };
 
@@ -42,7 +42,7 @@ export class GoalService {
   }
 
   deleteGoal(goal: GOAL): Observable<any> {
-    const newUrl = this.urlOne + "/" + goal._id;
+    const newUrl = this.urlOne + '/' + goal._id;
 
     return this.http.delete(newUrl, this.httpOptions);
   }
